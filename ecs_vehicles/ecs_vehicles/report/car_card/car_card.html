@@ -1,0 +1,287 @@
+
+<style>
+    * {
+            margin:0;
+            padding:0;
+            direction:rtl;
+        }
+        .print-format {
+            padding:0in;
+            
+        }
+    .header {
+        display:flex; 
+        flex-direction:column;
+        justify-content:center;
+    }
+    .under-header {
+        display: flex;
+    flex-direction: revert;
+    justify-content: space-evenly;
+    align-items: center;
+    }
+    .esm-algeha {
+        margin-top:30px;
+        display:flex;
+        flex-direction:row;
+        justify-content:space-between;
+    }
+    table, th, td , th{
+        border:2px solid black;
+        border-collapse:collapse;
+        text-align:center;
+        white-space: nowrap;
+
+    }
+    .print-format th {
+        color:black;
+            text-align:center;
+            font-weight:bold;
+            background-color:lightgray;
+            white-space: nowrap;
+
+    
+    }
+    .print-format td {
+        padding: 0px !important;
+        white-space: nowrap;
+    }
+    .break {
+        flex-basis: 100%;
+        height: 0;
+      }
+      .column1 {
+        border-left: 2px solid black;
+      }
+    .table1 {
+        margin-top:5px;
+        margin-right:20px;
+        margin-left:20px;
+        display:flex; 
+        flex-direction:column;
+    
+    }
+
+.header-box {
+    justify-content: space-around;
+    display: flex;
+    align-items: center;
+    /* padding: 2px; */
+    border: 2px solid black;
+    /* width: 90%; */
+    /* margin-bottom: 20px; */
+    margin: 10px 20px;
+}
+.sec-three {
+    
+    /* border-right: 2px solid black; */
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 98%;
+    font-size: 11pt;
+    font-weight: bold;
+    /* padding: 7pt; */
+
+
+}
+    </style>
+    {% var numbers = ({"0":"٠","1":"١","2": "٢", "3":"٣", "4":"٤", "5":"٥", "6":"٦", "7":"٧", "8":"٨", "9":"٩"}) %}
+
+    {% var pageNumber = 0 %}
+    {% var months = ["يناير", "فبراير", "مارس", "ابريل", "مايو", "يونيو", "يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر", "ديسمبر"]%}
+    
+<div class="header">
+
+    <div class="under-header">
+        
+    <div style="    font-weight: bold;
+    font-size: large;
+    margin-left: -310px;">
+        كارتة سابقة الصرف
+    </div>
+    <div>
+        <div style="display: flex; flex-direction: row; align-items: center;">
+            <div style="font-weight: bold;">تاريخ الطباعة  </div>
+            <div style="border:2px solid black; width:100px; text-align:center; margin-left:10px;margin-right:10px; font-weight:bold;">
+                {% let date = [] %}
+                {% [...frappe.datetime.str_to_user(frappe.datetime.get_datetime_as_string()).toString()].forEach((item, idx, array)=>{ %}
+                    {% date.push(numbers[item] ? numbers[item] : item  ) %}
+                {% }) %}                
+                {%= date.join("") %}
+                {{data[0].cur_user}}
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+
+</div>
+
+<div class="header-box">
+   
+    <div class="sec-three">
+        <div style="display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-left: 2px solid;
+        padding-left: 29px;
+    ">
+            <div>
+        <img style="width:40px; height:40px; margin-top:16px;" src="/files/markabat logoce3b5ed30c07.png">
+        </div>
+        <div style="font-weight:bold;">
+            وزارة الداخلية
+        </div>
+        <div>
+        الادارة العامه لمركبات الشرطه
+        </div>
+        <div>
+        </div>
+        </div>
+        <div>
+            
+
+            {% let vehicle_no = [] %}
+            {% [...data[0].vehicle_no].forEach((item, idx, array)=>{ %}
+                {% vehicle_no.push(numbers[item] ? numbers[item] : item  ) %}
+            {% }) %}
+
+        <p>  رقم المركبة شرطة:  {%= vehicle_no.join("") %} </p>
+        <p>    الشكل: {%= data[0].vehicle_shape %}</p>
+        <p>    نوع الحيازة: {%= data[0].possession_type %} </p>
+        <p>    مخصص الصرف: {%= data[0].exchange_allowance %} </p>
+        <p >  الجهه التابع لها : {%= data[0].entity_name %}  </p>
+        </div>
+        <div>
+            {% let chassis_no = [] %}
+            {% [...data[0].chassis_no].forEach((item, idx, array)=>{ %}
+                {% chassis_no.push(numbers[item] ? numbers[item] : item  ) %}
+            {% }) %}
+         <p > رقم الشاسية :  {%= chassis_no.join("") %}  </p>
+         <p >  مجموعة الشكل :   {%= data[0].group_shape %} </p>
+         {% let vehicle_model = [] %}
+         {% [...data[0].vehicle_model.toString()].forEach((item, idx, array)=>{ %}
+             {% vehicle_model.push(numbers[item] ? numbers[item] : item  ) %}
+         {% }) %}
+         <p >   الموديل  :  {%= vehicle_model.join("") %} </p>
+         {% let litre_capacity = [] %}
+         {% [...data[0].litre_capacity.toString()].forEach((item, idx, array)=>{ %}
+             {% litre_capacity.push(numbers[item] ? numbers[item] : item  ) %}
+         {% }) %}
+         <p >   السعة اللترية: {%= litre_capacity.join("") %}   </p>
+        
+        </div>
+        <div >
+         <p> الماركه / الطراز : {%= data[0].vehicle_style %}   / {%= data[0].vehicle_brand %}  </p>
+         {% let motor_no = [] %}
+         {% [...data[0].motor_no].forEach((item, idx, array)=>{ %}
+             {% motor_no.push(numbers[item] ? numbers[item] : item  ) %}
+         {% }) %}
+         <p >   رقم الموتور :  {%= motor_no.join("") %}</p>
+         {% let possession_date = [] %}
+         {% [...data[0].possession_date].forEach((item, idx, array)=>{ %}
+             {% possession_date.push(numbers[item] ? numbers[item] : item  ) %}
+         {% }) %}
+         <p >    تاريخ الحيازة : {%= possession_date.join("") %}</p>
+         {% let fuel_type = [] %}
+         {% [...data[0].fuel_type.toString()].forEach((item, idx, array)=>{ %}
+             {% fuel_type.push(numbers[item] ? numbers[item] : item  ) %}
+         {% }) %}
+         <p >   نوع الوقود          : {%= fuel_type.join("") %} </p>
+         
+        </div>
+    </div>
+ 
+
+</div>
+
+
+
+{% var counter = 1 %}
+
+
+<div class="table1">
+        <table style="font-family:Cairo" dir="rtl">
+            <thead>
+                <tr>
+                    <th>{%= __("م") %}</th>
+                    <th>{%= __("كود القطعة") %}</th>
+                    <th>{%= __("قطعة الغيار") %}</th>
+                    <th>{%= __("تاريخ الإجراء") %}</th>
+                    <th>{%= __("الكمية") %}</th>
+                    <th> {%= __("الوحدة") %}</th>
+                    <th>{%= __("المنشأ") %}</th>
+                    <th>{%= __("الصلاحية") %}</th>
+                    <th>{%= __("نوع النموذج") %}</th>
+                    <th>{%= __("رقم النموذج") %}</th>
+                    <th>{%= __("تاريخ النموذج") %}</th>
+                    <th>{%= __("جهة الصيانة") %}</th>
+                    <th>{%= __("نوع الورش") %}</th>
+                    <th>{%= __("إسم الورش") %}</th>
+    
+                </tr>
+            </thead>
+            <tbody>
+                {% for(var i=0, f=data.length -1; i<f; i++) { %}
+
+                <tr>
+                    {% let indes = [] %}
+         {% [...(i+1).toString()].forEach((item, idx, array)=>{ %}
+             {% indes.push(numbers[item] ? numbers[item] : item  ) %}
+         {% }) %}
+                    <td>
+                        {%= indes.join("") %}
+                    </td>
+                    {% let item_code = [] %}
+         {% [...data[i].item_code.toString()].forEach((item, idx, array)=>{ %}
+             {% item_code.push(numbers[item] ? numbers[item] : item  ) %}
+         {% }) %}
+                    <td>{%= item_code.join("") %}</td>
+
+                </td>
+                {% let item_name = [] %}
+                {% [...data[i].item_name.toString()].forEach((item, idx, array)=>{ %}
+                    {% item_name.push(numbers[item] ? numbers[item] : item  ) %}
+                {% }) %}
+                <td>{%= item_name.join("") %}</td>
+
+                    {% let date = [] %}
+                    {% [...data[i].date.toString()].forEach((item, idx, array)=>{ %}
+                        {% date.push(numbers[item] ? numbers[item] : item  ) %}
+                    {% }) %}
+                    <td>{%= date.join("").split("-")[2] %} / {%= date.join("").split("-")[1] %} / {%= date.join("").split("-")[0] %}</td>
+                    {% let qty = [] %}
+                    {% [...data[i].qty.toString()].forEach((item, idx, array)=>{ %}
+                        {% qty.push(numbers[item] ? numbers[item] : item  ) %}
+                    {% }) %}
+                    <td>{%= qty.join("") %}</td>
+                    <td>{%= data[i].default_unit_of_measure %}</td>
+                    <td>{%= data[i].brand %}</td>
+                    {% let validity = [] %}
+                    {% [...data[i].validity.toString()].forEach((item, idx, array)=>{ %}
+                        {% validity.push(numbers[item] ? numbers[item] : item  ) %}
+                    {% }) %}
+                    <td>{%= validity.join("") %}</td>
+                    {% let ezn_no = [] %}
+                    {% [...data[i].ezn_no.toString()].forEach((item, idx, array)=>{ %}
+                        {% ezn_no.push(numbers[item] ? numbers[item] : item  ) %}
+                    {% }) %}
+                    <td>{%= data[i].namozg %}</td>
+                    <td>{%= ezn_no.join("") %}</td>
+                    {% let namozg_date = [] %}
+                    {% [...data[i].date2.toString()].forEach((item, idx, array)=>{ %}
+                        {% namozg_date.push(numbers[item] ? numbers[item] : item  ) %}
+                    {% }) %}
+                    <td>{%= namozg_date.join("").split("-")[2] %} / {%= namozg_date.join("").split("-")[1] %} / {%= namozg_date.join("").split("-")[0] %}</td>
+                    <td>{%= data[i].maintenance_entity %}</td>
+                    <td>{%= data[i].werash %}</td>
+                    <td>{%= data[i].werash_name %}</td>
+                </tr>
+                {% } %}
+
+            </tbody>
+        </table>
+    </div>
