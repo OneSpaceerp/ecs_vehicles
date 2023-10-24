@@ -1,0 +1,26 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2023-01-25 11:25:25.125007",
+ "disable_prepared_report": 1,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "modified": "2023-06-12 14:26:50.081737",
+ "modified_by": "Administrator",
+ "module": "Ecs Vehicles",
+ "name": "Vehicle Liquid History",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Vehicles",
+ "report_name": "Vehicle Liquid History",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  }
+ ]
+}
